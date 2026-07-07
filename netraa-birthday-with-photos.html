@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Netraa 🎂</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,600&family=Quicksand:wght@400;600;700&display=swap');
+
+  :root{
+    --cream:#FFF7F0;
+    --pink:#FFD6E0;
+    --rose:#E8849A;
+    --deeprose:#C9184A;
+    --gold:#F0A868;
+    --plum:#4A1942;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Quicksand', sans-serif;
+    background: radial-gradient(circle at 20% 20%, #fff0e8 0%, var(--cream) 45%, #ffe9ef 100%);
+    color:var(--plum);
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  .float{
+    position:fixed;
+    font-size:1.6rem;
+    opacity:0.35;
+    pointer-events:none;
+    animation: drift linear infinite;
+    user-select:none;
+    z-index:0;
+  }
+  @keyframes drift{
+    0%{ transform: translateY(110vh) rotate(0deg); }
+    100%{ transform: translateY(-10vh) rotate(360deg); }
+  }
+
+  .wrap{
+    position:relative;
+    z-index:1;
+    max-width:640px;
+    margin:0 auto;
+    padding:2.2rem 1.4rem 5rem;
+    text-align:center;
+  }
+
+  .eyebrow{
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    font-size:0.7rem;
+    color:var(--rose);
+    font-weight:700;
+    margin-bottom:0.6rem;
+  }
+
+  h1{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:2.6rem;
+    line-height:1.15;
+    margin:0 0 0.4rem;
+    color:var(--deeprose);
+  }
+  h1 span{ color: var(--plum); font-style: normal; font-weight:700;}
+
+  .sub{
+    font-size:1rem;
+    color:#7a4a5c;
+    margin-bottom:2.2rem;
+  }
+
+  /* Countdown card */
+  .card{
+    background:#fff;
+    border-radius:28px;
+    padding:1.8rem 1.4rem;
+    box-shadow: 0 20px 45px -20px rgba(201,24,74,0.25);
+    margin-bottom:2rem;
+  }
+
+  #countdown-view .timer{
+    display:flex;
+    justify-content:center;
+    gap:0.7rem;
+    margin:1rem 0 0.4rem;
+    flex-wrap:wrap;
+  }
+  .tbox{
+    background: linear-gradient(160deg, var(--pink), #fff);
+    border-radius:16px;
+    padding:0.7rem 0.9rem;
+    min-width:64px;
+  }
+  .tbox .num{
+    font-family:'Playfair Display', serif;
+    font-size:1.7rem;
+    font-weight:700;
+    color:var(--deeprose);
+    display:block;
+  }
+  .tbox .lbl{
+    font-size:0.62rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#a35a72;
+  }
+
+  .hint{
+    font-size:0.85rem;
+    color:#a35a72;
+    margin-top:0.9rem;
+  }
+
+  #celebration{ display:none; }
+
+  /* Cake */
+  .cake-zone{ margin: 0.5rem 0 1.6rem; }
+  .cake-tap{ font-size:0.85rem; color:#a35a72; margin-bottom:0.8rem; }
+  .cake{
+    width:180px;
+    margin:0 auto;
+    cursor:pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .flame{ transition: opacity .25s ease, transform .25s ease; transform-origin:center bottom; }
+  .flame.out{ opacity:0; transform: scaleY(0.2); }
+  .smoke{ opacity:0; }
+  .smoke.show{ animation: smokeUp 1.4s ease-out forwards; }
+  @keyframes smokeUp{
+    0%{ opacity:0.6; transform:translateY(0) scale(1);}
+    100%{ opacity:0; transform:translateY(-30px) scale(1.8);}
+  }
+
+  .blown-msg{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    color:var(--deeprose);
+    font-weight:600;
+    min-height:1.4em;
+    margin-top:0.6rem;
+  }
+
+  /* Reasons cards */
+  .reasons{ display:none; margin-top:1.6rem; }
+  .reasons.show{ display:block; }
+  .reason-title{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:1.3rem;
+    color:var(--deeprose);
+    margin-bottom:1rem;
+  }
+  .flip-card{
+    background: transparent;
+    perspective: 1000px;
+    height:260px;
+    margin-bottom:1rem;
+  }
+  .flip-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    text-align:center;
+    transition: transform 0.6s;
+    transform-style:preserve-3d;
+    cursor:pointer;
+  }
+  .flip-card.flipped .flip-inner{ transform: rotateY(180deg); }
+  .flip-front, .flip-back{
+    position:absolute;
+    width:100%;
+    height:100%;
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:1rem;
+    font-size:0.95rem;
+  }
+  .flip-front{
+    background: linear-gradient(160deg,#fff, var(--pink));
+    color:var(--deeprose);
+    font-weight:700;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:1.15rem;
+  }
+  .flip-back{
+    background: linear-gradient(160deg, var(--deeprose), #a4123f);
+    color:#fffaf5;
+    transform: rotateY(180deg);
+    line-height:1.45;
+    font-size:0.82rem;
+    overflow-y:auto;
+  }
+
+  /* Final message */
+  .finale{ display:none; margin-top:1.8rem; }
+  .finale.show{ display:block; }
+  .finale h2{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    color:var(--deeprose);
+    font-size:1.5rem;
+    margin-bottom:0.8rem;
+  }
+  .finale p{
+    line-height:1.7;
+    font-size:0.98rem;
+    color:#5a2f42;
+  }
+  .signature{
+    margin-top:1.4rem;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    color:var(--rose);
+    font-size:1.05rem;
+  }
+
+  button.primary{
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    color:#fff;
+    background: linear-gradient(135deg, var(--deeprose), var(--rose));
+    border:none;
+    padding:0.85rem 1.8rem;
+    border-radius:999px;
+    cursor:pointer;
+    box-shadow: 0 12px 24px -10px rgba(201,24,74,0.5);
+    transition: transform 0.15s ease;
+  }
+  button.primary:active{ transform: scale(0.96); }
+
+  .confetti{
+    position:fixed;
+    top:-10px;
+    z-index:5;
+    border-radius:2px;
+    pointer-events:none;
+  }
+
+  #skip-btn{
+    margin-top:1rem;
+    background:none;
+    border:none;
+    color:#c98aa0;
+    text-decoration:underline;
+    font-size:0.8rem;
+    cursor:pointer;
+    font-family:'Quicksand',sans-serif;
+  }
+
+  /* Gallery */
+  .gallery{ display:none; margin-top:1.6rem; }
+  .gallery.show{ display:block; }
+  .gallery-title{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:1.3rem;
+    color:var(--deeprose);
+    margin-bottom:1rem;
+  }
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0.7rem;
+  }
+  .gallery-slot{
+    aspect-ratio:1/1;
+    border-radius:18px;
+    background: linear-gradient(160deg, var(--pink), #fff);
+    border:2px dashed var(--rose);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    color:#b5657f;
+    font-size:0.75rem;
+    padding:0.5rem;
+    text-align:center;
+    overflow:hidden;
+  }
+  .gallery-slot img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:14px;
+  }
+
+  /* Mango game */
+  .game-section{ display:none; margin-top:1.6rem; }
+  .game-section.show{ display:block; }
+  .game-title{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:1.3rem;
+    color:var(--deeprose);
+    margin-bottom:0.4rem;
+  }
+  .game-sub{ font-size:0.85rem; color:#a35a72; margin-bottom:1rem; }
+  .game-hud{
+    display:flex;
+    justify-content:space-between;
+    font-weight:700;
+    color:var(--deeprose);
+    font-size:0.95rem;
+    margin-bottom:0.6rem;
+    padding:0 0.2rem;
+  }
+  .game-area{
+    position:relative;
+    width:100%;
+    height:340px;
+    background: linear-gradient(180deg, #fff9f4, var(--pink));
+    border-radius:22px;
+    overflow:hidden;
+    border:3px solid #fff;
+    box-shadow: inset 0 0 0 2px var(--pink);
+  }
+  .mango{
+    position:absolute;
+    top:-40px;
+    font-size:2.1rem;
+    cursor:pointer;
+    user-select:none;
+    -webkit-tap-highlight-color: transparent;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+  }
+  .caught-pop{
+    position:absolute;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:700;
+    color:var(--deeprose);
+    font-size:0.9rem;
+    pointer-events:none;
+    animation: popFade 0.8s ease-out forwards;
+  }
+  @keyframes popFade{
+    0%{ opacity:1; transform:translateY(0) scale(0.8); }
+    100%{ opacity:0; transform:translateY(-30px) scale(1.2); }
+  }
+  .game-result{
+    margin-top:0.9rem;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    color:var(--deeprose);
+    font-size:1.05rem;
+    min-height:1.4em;
+  }
+  .game-start{ text-align:center; margin-top:0.6rem; }
+
+  @media (prefers-reduced-motion: reduce){
+    .float{ animation:none; display:none; }
+    .flip-inner, .flame, .smoke{ transition:none; animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="eyebrow">From Vibhas, with love</div>
+  <h1>Happy Birthday,<br><span>Netraa 🌸</span></h1>
+  <div class="sub">A tiny website made just for you.</div>
+
+  <div class="card" id="countdown-view">
+    <div id="pre-midnight">
+      <div style="font-size:0.9rem; color:#a35a72;">Almost time...</div>
+      <div class="timer">
+        <div class="tbox"><span class="num" id="hh">00</span><span class="lbl">Hours</span></div>
+        <div class="tbox"><span class="num" id="mm">00</span><span class="lbl">Mins</span></div>
+        <div class="tbox"><span class="num" id="ss">00</span><span class="lbl">Secs</span></div>
+      </div>
+      <div class="hint">until the clock strikes 12 and it's officially your day 🎉</div>
+      <button id="skip-btn" onclick="skipToMidnight()">I can't wait — let me in early 🙈</button>
+    </div>
+
+    <div id="celebration">
+      <div class="cake-zone">
+        <div class="cake-tap">It's midnight! Tap the flames to blow out the candles 🕯️</div>
+        <svg class="cake" viewBox="0 0 200 200" id="cakeSvg">
+          <ellipse cx="100" cy="175" rx="80" ry="14" fill="#f7c8d4"/>
+          <rect x="30" y="120" width="140" height="55" rx="10" fill="#f89bb3"/>
+          <rect x="30" y="120" width="140" height="14" fill="#ffffff" opacity="0.6"/>
+          <rect x="45" y="80" width="110" height="45" rx="10" fill="#f4728f"/>
+          <rect x="45" y="80" width="110" height="12" fill="#ffffff" opacity="0.6"/>
+          <g class="candle-group" data-idx="0">
+            <rect x="65" y="55" width="8" height="28" rx="3" fill="#f0a868"/>
+            <ellipse class="flame" cx="69" cy="50" rx="6" ry="11" fill="#ffb347"/>
+            <ellipse class="flame" cx="69" cy="48" rx="3" ry="6" fill="#fff2c4"/>
+            <ellipse class="smoke" cx="69" cy="42" rx="4" ry="8" fill="#c9b8b8"/>
+          </g>
+          <g class="candle-group" data-idx="1">
+            <rect x="96" y="48" width="8" height="35" rx="3" fill="#e8849a"/>
+            <ellipse class="flame" cx="100" cy="42" rx="6" ry="11" fill="#ffb347"/>
+            <ellipse class="flame" cx="100" cy="40" rx="3" ry="6" fill="#fff2c4"/>
+            <ellipse class="smoke" cx="100" cy="34" rx="4" ry="8" fill="#c9b8b8"/>
+          </g>
+          <g class="candle-group" data-idx="2">
+            <rect x="127" y="55" width="8" height="28" rx="3" fill="#f0a868"/>
+            <ellipse class="flame" cx="131" cy="50" rx="6" ry="11" fill="#ffb347"/>
+            <ellipse class="flame" cx="131" cy="48" rx="3" ry="6" fill="#fff2c4"/>
+            <ellipse class="smoke" cx="131" cy="42" rx="4" ry="8" fill="#c9b8b8"/>
+          </g>
+        </svg>
+        <div class="blown-msg" id="blownMsg"></div>
+      </div>
+
+      <div class="reasons" id="reasonsSection">
+        <div class="reason-title">tap each card, netraa 💌</div>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">Your Smile</div>
+            <div class="flip-back">Netraa tula bagitl ki maja chehra khulun yeto g.. Tuja call, message, reel, even Snap jari ala tari te bagnyasathi network madhe jaun te bagn maja sathi khup molach ahe tuja te galat hasn khup kautukaspad ahe maja sathi pilyaa me tuja vr prem karat hoto ahe ani rahin😘🧿❤️ love u soo much 😘</div>
+          </div>
+        </div>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">tuji sath</div>
+            <div class="flip-back">pilya mla tuja sobat phudche 7 janma rhaychay anu te pan rahu🫠 maj ky chukl asel me tula khul vela radvlay sudhha tyachi shiksha tu nahi pn dev mla nakki deil. Me tuja birthday jari mothya jalloshamdhe jari nahi kela tuja manasarkha jari nahi kela asla tari jevd hotay tevd kartoy ani tu mla smjun gheshil love you forever ♾️❤️😘</div>
+          </div>
+        </div>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">bhet ani sobat</div>
+            <div class="flip-back">pilya mla to divas athvtoy jevha tu mla first time disli Hotis ani nantr apl te instagram vr boln ani apl mandvit bhetn tikdun chalu jhalela apla pravas me kadhich nahi visrnr me tula to dilele starting la trass ani srvch kadhich nahi visrnr me tuji sath kayam det rahin tula moth jhalel pn bagaychay ani tu nakki hoshil maja support ahe tula kayam sobat rahu ekmekana sath deu lagn karun apli family ti pn aplya god god mulansobat 😄😘 Love you pilyaa😘 🫶🏻</div>
+          </div>
+        </div>
+        <button class="primary" onclick="showGallery()">Ek surprise ahe, pudhe chal 👉</button>
+      </div>
+
+      <div class="gallery" id="gallerySection">
+        <div class="gallery-title">amche kahi moments 📸</div>
+        <div class="gallery-grid">
+<div class="gallery-slot"><img src="1000664856.jpg" alt="photo"></div>
+<div class="gallery-slot"><img src="1000664859.jpg" alt="photo"></div>
+<div class="gallery-slot"><img src="1000664858.jpg" alt="photo"></div>
+<div class="gallery-slot"><img src="1000664857.jpg" alt="photo"></div>
+<div class="gallery-slot"><img src="1000468280.jpg" alt="photo"></div>
+<div class="gallery-slot"><img src="1000468056.jpg" alt="photo"></div>
+<div class="gallery-slot"><img src="1000468405.jpg" alt="photo"></div>
+<div class="gallery-slot"><img src="1000464935.jpg" alt="photo"></div>
+<div class="gallery-slot"><img src="1000467092.jpg" alt="photo"></div>
+</div>
+        <div class="game-start">
+          <button class="primary" onclick="showGame()">Chala, ek game khelu 🥭</button>
+        </div>
+      </div>
+
+      <div class="game-section" id="gameSection">
+        <div class="game-title">Mango Catch 🥭</div>
+        <div class="game-sub">Netraa, Ratnagiri Alphonso pakडायla ready ho! 20 second madhe jevढे jamtील tevढे mango tap kar.</div>
+        <div class="game-hud">
+          <span id="scoreDisplay">Score: 0</span>
+          <span id="timeDisplay">Time: 20s</span>
+        </div>
+        <div class="game-area" id="gameArea"></div>
+        <div class="game-result" id="gameResult"></div>
+        <div class="game-start">
+          <button class="primary" id="gameStartBtn" onclick="startMangoGame()">Game start kar 🎮</button>
+          <button class="primary" style="margin-top:0.7rem; display:none;" id="toLetterBtn" onclick="showFinale()">Ata, birthday letter उघड 💌</button>
+        </div>
+      </div>
+
+      <div class="finale" id="finaleSection">
+        <h2>Dear Netraa,</h2>
+        <p>Another year of you being effortlessly you — loud laughs, terrible puns, and somehow always knowing what to say. I'm really lucky to call you my best friend.</p>
+        <p>Here's to more chai-fuelled rants, spontaneous plans that never work out, and another year of putting up with me. Happy Birthday! 🎂</p>
+        <div class="signature">— Vibhas</div>
+        <button class="primary" style="margin-top:1.2rem;" onclick="burstConfetti(60)">One more surprise 🎊</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // floating background emojis
+  const emojis = ['🌸','🎈','✨','🎂','💌','🌷'];
+  for(let i=0;i<14;i++){
+    const el = document.createElement('div');
+    el.className='float';
+    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.left = Math.random()*100+'vw';
+    el.style.animationDuration = (10+Math.random()*14)+'s';
+    el.style.animationDelay = (-Math.random()*20)+'s';
+    el.style.fontSize = (1+Math.random()*1.4)+'rem';
+    document.body.appendChild(el);
+  }
+
+  function getNextMidnight(){
+    const now = new Date();
+    const midnight = new Date(now);
+    midnight.setHours(24,0,0,0);
+    return midnight;
+  }
+
+  let target = getNextMidnight();
+  let celebrating = false;
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function tick(){
+    if(celebrating) return;
+    const now = new Date();
+    const diff = target - now;
+    if(diff <= 0){
+      enterCelebration();
+      return;
+    }
+    const h = Math.floor(diff/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    document.getElementById('hh').textContent = pad(h);
+    document.getElementById('mm').textContent = pad(m);
+    document.getElementById('ss').textContent = pad(s);
+  }
+  setInterval(tick, 1000);
+  tick();
+
+  function skipToMidnight(){
+    enterCelebration();
+  }
+
+  function enterCelebration(){
+    celebrating = true;
+    document.getElementById('pre-midnight').style.display='none';
+    document.getElementById('celebration').style.display='block';
+    burstConfetti(80);
+    setupCandles();
+  }
+
+  function setupCandles(){
+    const groups = document.querySelectorAll('.candle-group');
+    let blownCount = 0;
+    groups.forEach(g=>{
+      g.style.cursor='pointer';
+      g.addEventListener('click', function handler(){
+        if(g.dataset.done) return;
+        g.dataset.done = '1';
+        g.querySelectorAll('.flame').forEach(f=>f.classList.add('out'));
+        const smoke = g.querySelector('.smoke');
+        smoke.classList.add('show');
+        blownCount++;
+        if(blownCount === groups.length){
+          document.getElementById('blownMsg').textContent = 'Make a wish, Netraa 🌟';
+          burstConfetti(50);
+          setTimeout(()=>{
+            document.getElementById('reasonsSection').classList.add('show');
+          }, 900);
+        }
+      });
+    });
+  }
+
+  function showGallery(){
+    document.getElementById('gallerySection').classList.add('show');
+    document.getElementById('gallerySection').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function showGame(){
+    document.getElementById('gameSection').classList.add('show');
+    document.getElementById('gameSection').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  let mangoScore = 0;
+  let mangoTimeLeft = 20;
+  let mangoTimerId = null;
+  let mangoSpawnId = null;
+  let mangoGameRunning = false;
+  const mangoCaptions = ['Zaka! 🥭','Ekdum best!','Alphonso ala!','Wah Netraa!','Sahi pakडla!','Kadak!'];
+
+  function startMangoGame(){
+    if(mangoGameRunning) return;
+    mangoGameRunning = true;
+    mangoScore = 0;
+    mangoTimeLeft = 20;
+    document.getElementById('scoreDisplay').textContent = 'Score: 0';
+    document.getElementById('timeDisplay').textContent = 'Time: 20s';
+    document.getElementById('gameResult').textContent = '';
+    document.getElementById('gameStartBtn').style.display = 'none';
+    document.getElementById('toLetterBtn').style.display = 'none';
+    const area = document.getElementById('gameArea');
+    area.innerHTML = '';
+
+    mangoSpawnId = setInterval(spawnMango, 650);
+    mangoTimerId = setInterval(()=>{
+      mangoTimeLeft--;
+      document.getElementById('timeDisplay').textContent = 'Time: ' + mangoTimeLeft + 's';
+      if(mangoTimeLeft <= 0){
+        endMangoGame();
+      }
+    }, 1000);
+  }
+
+  function spawnMango(){
+    const area = document.getElementById('gameArea');
+    if(!area) return;
+    const mango = document.createElement('div');
+    mango.className = 'mango';
+    mango.textContent = '🥭';
+    const areaWidth = area.clientWidth;
+    const startX = Math.random() * (areaWidth - 40);
+    mango.style.left = startX + 'px';
+    area.appendChild(mango);
+
+    const fallDuration = 2600 + Math.random()*1400;
+    const anim = mango.animate([
+      { transform: 'translateY(0) rotate(0deg)' },
+      { transform: `translateY(${area.clientHeight + 60}px) rotate(${Math.random()>0.5?360:-360}deg)` }
+    ], { duration: fallDuration, easing:'linear' });
+
+    anim.onfinish = () => { if(mango.parentNode) mango.remove(); };
+
+    mango.addEventListener('click', function(){
+      if(mango.dataset.caught) return;
+      mango.dataset.caught = '1';
+      anim.cancel();
+      const rect = mango.getBoundingClientRect();
+      const areaRect = area.getBoundingClientRect();
+      const pop = document.createElement('div');
+      pop.className = 'caught-pop';
+      pop.textContent = mangoCaptions[Math.floor(Math.random()*mangoCaptions.length)];
+      pop.style.left = (rect.left - areaRect.left) + 'px';
+      pop.style.top = (rect.top - areaRect.top) + 'px';
+      area.appendChild(pop);
+      setTimeout(()=>pop.remove(), 800);
+      mango.remove();
+      mangoScore++;
+      document.getElementById('scoreDisplay').textContent = 'Score: ' + mangoScore;
+    });
+  }
+
+  function endMangoGame(){
+    mangoGameRunning = false;
+    clearInterval(mangoSpawnId);
+    clearInterval(mangoTimerId);
+    document.getElementById('gameArea').innerHTML = '';
+    let msg = '';
+    if(mangoScore >= 15) msg = 'Score ' + mangoScore + '! Tu tar official Mango Queen 👑🥭';
+    else if(mangoScore >= 8) msg = 'Score ' + mangoScore + '! Ekdum mast, Alphonso expert! 🥭';
+    else if(mangoScore >= 3) msg = 'Score ' + mangoScore + '! Chalega, practice karu pudhchya varshi 😄';
+    else msg = 'Score ' + mangoScore + '! Mango pakadnyapeksha tu jast god ahes 😘';
+    document.getElementById('gameResult').textContent = msg;
+    document.getElementById('gameStartBtn').textContent = 'Punha khel 🔄';
+    document.getElementById('gameStartBtn').style.display = 'inline-block';
+    document.getElementById('toLetterBtn').style.display = 'inline-block';
+    burstConfetti(30);
+  }
+
+  function showFinale(){
+    document.getElementById('finaleSection').classList.add('show');
+    burstConfetti(70);
+    document.getElementById('finaleSection').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function burstConfetti(count){
+    const colors = ['#E8849A','#C9184A','#F0A868','#FFD6E0','#fff'];
+    for(let i=0;i<count;i++){
+      const c = document.createElement('div');
+      c.className='confetti';
+      const size = 6+Math.random()*6;
+      c.style.width = size+'px';
+      c.style.height = (size*0.4+Math.random()*size*0.6)+'px';
+      c.style.background = colors[Math.floor(Math.random()*colors.length)];
+      c.style.left = Math.random()*100+'vw';
+      c.style.transform = `rotate(${Math.random()*360}deg)`;
+      document.body.appendChild(c);
+      const duration = 2500+Math.random()*2000;
+      const drift = (Math.random()-0.5)*200;
+      c.animate([
+        { transform: c.style.transform + ' translateY(0px)', opacity:1 },
+        { transform: `translate(${drift}px, 100vh) rotate(${Math.random()*720}deg)`, opacity:0.9 }
+      ], { duration: duration, easing:'ease-in' });
+      setTimeout(()=>c.remove(), duration+100);
+    }
+  }
+</script>
+</body>
+</html>
